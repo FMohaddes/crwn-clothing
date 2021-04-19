@@ -1,12 +1,23 @@
 import React from 'react'
-import './App.css';
+import SHOP_DATA from "./shop-data";
+import CollectionPreview from "../../components/collection-preview/collection-preview";
 
-function Shop() {
+function ShopPage() {
+     const [ collection , setCollection ] = React.useState( {
+          
+          collections : SHOP_DATA
+     } )
      return (
-         <div>
-              <h1>hi </h1>
-         </div>
+          <div className='shop-page'>
+               {
+                    collection.collections.map(({id , ...collectionProp}) => {
+                         return(
+                              <CollectionPreview key={collection.id} {...collectionProp}/>
+                         )
+                    })
+               }
+          </div >
      );
 }
 
-export default Shop;
+export default ShopPage;
