@@ -8,13 +8,13 @@ function ShopPage() {
           collections : SHOP_DATA
      } )
      return (
-          <div className='shop-page'>
+          <div className = 'shop-page' >
                {
-                    collection.collections.map(({id , ...collectionProp}) => {
-                         return(
-                              <CollectionPreview key={collection.id} {...collectionProp}/>
+                    collection.collections.map( ( { id , ...collectionProp } ) => {
+                         return (
+                              <CollectionPreview key = { collection.id } { ...collectionProp }/>
                          )
-                    })
+                    } )
                }
           </div >
      );
