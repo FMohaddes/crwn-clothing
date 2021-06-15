@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { auth } from '../../firebase/firebase.utils'
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { selectCartHidden } from "../../redux/cart/cart-selectors";
-
 import { ReactComponent as Logo } from './../../assets/4.1 crown.svg'
 import CartIcon from "../cart-icon/cart-icon";
 import CartDropdown from "../cart-dropdown/cart-dropdown";

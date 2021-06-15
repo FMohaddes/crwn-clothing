@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import collection from "../pages/collection/collection";
 
 const config = {
      apiKey            : "AIzaSyDF4F2U_vdSI37PUWaGBN7ozOr6DTDwhOA" ,
@@ -12,6 +13,9 @@ const config = {
      measurementId     : "G-QTXTCSBYWW"
 };
 
+firebase.initializeApp( config );
+
+
 export const createUserProfileDocument = async ( userAuth , additional ) => {
      if ( !userAuth ) return;
      
@@ -21,19 +25,43 @@ export const createUserProfileDocument = async ( userAuth , additional ) => {
      if ( !snapShot.exists ) {
           const { displayName , email } = userAuth;
           const date = new Date()
-          console.log(displayName)
+          console.log( displayName )
           try {
-               await userRef.set( { displayName ,
+               await userRef.set( {
+                    displayName ,
                     email , date , ...additional
                } )
           } catch (err) {
-               console.log( 'err creating user' ,err.message )
+               console.log( 'err creating user' , err.message )
           }
      }
      return userRef;
 }
 
-firebase.initializeApp( config );
+export const addCollectionAndDocuments = async ( collectionKey , objectToAdd ) => {
+     
+     const collectionRef = firestore.collection( collectionKey )
+     const batch = firestore.batch();
+     objectToAdd.forEach( obj => {
+          const newDocRef = collectionRef.doc()
+          batch.set( newDocRef , obj )
+     } )
+     return await batch.commit()
+}
+
+export const convertCollectionsSnapshotToMap = collectionsSnapShop => {
+     const transformedCollection = collectionsSnapShop.docs.map( doc => {
+          const { title , items } = doc.data()
+          return {
+               routeName : encodeURI( title.toLowerCase() ) ,
+               id        : doc.id , title , items
+          }
+     } )
+    return  transformedCollection.reduce( ( accumulator , collection ) => {
+      accumulator[ collection.title.toLowerCase() ] = collection
+          return accumulator} , {} )
+}
+
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();

@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import CollectionPreview from "../collection-preview/collection-preview";
 
 function CollectionOverview ({collections}) {
+  
   return (
        <div className='collections-overview'>
          {
@@ -18,6 +19,7 @@ function CollectionOverview ({collections}) {
        </div >
   );
 }
+
 
 const mapStateToProps = createStructuredSelector({
   collections: selectCollectionsForPreview

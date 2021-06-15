@@ -1,7 +1,5 @@
 import React from 'react'
 import './App.css';
-
-
 import HomePage from "./pages/homepage/home-page";
 import ShopPage from "./pages/shop/shop";
 import SignInUP from "./pages/sign-in-up/sign-in-up";
@@ -11,12 +9,12 @@ import CheckOut from "./pages/checkout/checkout";
 import { Route , Switch , Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user-action";
-import { auth , createUserProfileDocument } from "./firebase/firebase.utils";
+import {  auth , createUserProfileDocument } from "./firebase/firebase.utils";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
 
 class App extends React.Component {
-     
+    
      unsubscribeFromAuth = null;
      
      componentDidMount() {
@@ -30,7 +28,7 @@ class App extends React.Component {
                               ...snapshot.data()
                          } )
                     } )
-               } else
+               }
                     this.props.setCurrentUser( userAuth )
           } );
      }
@@ -57,7 +55,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector( {
-     currentUser : selectCurrentUser
+     currentUser      : selectCurrentUser ,
 } )
 
 const mapDispatchToProps = dispatch => ({
@@ -68,13 +66,11 @@ export default connect( mapStateToProps , mapDispatchToProps )( App );
 
 
 /*   React.useEffect( () => {
- console.log('i')
  const unsubscribeFromAuth = auth.onAuthStateChanged( user => {
  setCurrentUser( { currentUser : user } )
  } )
  return () => {
  unsubscribeFromAuth();
- console.log('a')
  }
  } , [] )*/
  
