@@ -1,3 +1,13 @@
+:root{
+     
+     /*--base-font-size: 12px;*/
+     /*--fluid-typography-ratio: 0.9;*/
+     
+     /*--rem: calc(var(--base-font-size) + var(--fluid-typography-ratio) * 1vw);*/
+     
+     /*font-size: var(--rem);*/
+     }
+
 body {
      font-family : 'Open Sans Condensed', sans-serif;
      padding     : 20px 60px;
